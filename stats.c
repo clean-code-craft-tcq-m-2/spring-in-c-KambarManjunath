@@ -42,7 +42,7 @@ struct Stats compute_statistics(const float* numberset, int setlength) {
             }
         }
 
-        swap(&numset[index], &numset[p]);  
+        swap(&numset[index], &numset[i]);  
     }
     s.max = numset[setlength-1];           
     s.min = numset[0];                         

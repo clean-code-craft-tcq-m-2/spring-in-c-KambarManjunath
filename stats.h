@@ -1,4 +1,4 @@
-struct Stats compute_statistics 
+struct Stats
 {
     float average;
     float min;

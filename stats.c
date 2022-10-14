@@ -21,7 +21,9 @@ struct Stats compute_statistics(const float* numberset, int setlength)
     s.max = 0;
 
     int  stub_Val = 0;
-   float numset[setlength-1];
+    int count = 0;
+    float add = 0.0;
+    float numset[setlength-1];
    
     if(setlength == 0)
     {
@@ -32,12 +34,18 @@ struct Stats compute_statistics(const float* numberset, int setlength)
         return s;
     }
 // calculation of avg of given aray
-    for(i=0; i < setlength; i++)
+  for(count=0; count<setlength;count++)
     {
-        sum = sum + numberset[i];
+		/*Inputs taken from the stats-test.cpp to read the numberset. */
+        numset[count] = numberset[count]; 
     }
-    
-    avg = (sum)/(setlength);
+
+    for(k=0;k<setlength;k++)
+    {
+        add = add + numset[k];
+    }
+
+    s.average = (float) add/ setlength;
 
 // sorting given array
    for (i=0;i<setlength-1;i++)

@@ -2,6 +2,8 @@
 #include "stats.h"
 #include <math.h>
 
+
+
 struct Stats compute_statistics(const float* numberset, int setlength)
  {
     struct Stats s;
@@ -23,7 +25,7 @@ struct Stats compute_statistics(const float* numberset, int setlength)
 // calculation of avg of given aray
     for(i=0; i < setlength; i++)
     {
-        sum += *numberset[i];
+        sum = sum + numberset[i];
     }
     
     avg = (sum)/(setlength);
@@ -31,17 +33,17 @@ struct Stats compute_statistics(const float* numberset, int setlength)
 // sorting given array
     for(i=0; i < setlength; i++)
     {
-        if(*numberset[i] > *numberset[i+1])
+        if(numberset[i] > numberset[i+1])
         {
-            temp = *numberset[i];
-            *numberset[i] = *numberset[i+1];
+            temp = numberset[i];
+            numberset[i] = numberset[i+1];
             numberset[i] = temp;
         }
         
     }
     s.average = avg;
-    s.min = *numberset[0];
-    s.max = *numberset[setlength-1];
+    s.min = numberset[0];
+    s.max = numberset[setlength-1];
 
 return s;
 }

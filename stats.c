@@ -1,8 +1,6 @@
-#include <stdio.h>
 #include "stats.h"
-#include <math.h>
 
-
+/* fucntion to swap the contents of a variable*/
 void swap(float *xp, float *yp)
 {
     float temp = *xp;
@@ -10,65 +8,60 @@ void swap(float *xp, float *yp)
     *yp = temp;
 }
 
-struct Stats compute_statistics(const float* numberset, int setlength)
- {
+struct Stats compute_statistics(const float* numberset, int setlength) {
     struct Stats s;
-    int i,j,k;
-    float sum = 0.0, avg = 0.0;
-    float temp=0;
     s.average = 0;
     s.min = 0;
     s.max = 0;
 
-    int  stub_Val = 0;
+    int stub_Val = 0;
+    int p,q,r;
     int count = 0;
     float add = 0.0;
     float numset[setlength-1];
-   
-    if(setlength == 0)
-    {
-        //printf("Number set array has zero elements\n");
-        s.average = 0;
-        s.min = 0;
-        s.max = 0;
-        return s;
-    }
-// calculation of avg of given aray
-  for(count=0; count<setlength;count++)
+    
+    /*-------------To calculate Average-------------------*/
+    for(count=0; count<setlength;count++)
     {
 		/*Inputs taken from the stats-test.cpp to read the numberset. */
         numset[count] = numberset[count]; 
     }
 
-    for(k=0;k<setlength;k++)
+    for(r=0;r<setlength;r++)
     {
-        add = add + numset[k];
+        add = add + numset[r];
     }
 
-    s.average = (float) add/ setlength;
+    s.average = (float) add/ setlength;   // For, TEST_CASE("reports average, minimum and maximum")
 
-// sorting given array
-   for (i=0;i<setlength-1;i++)
+
+    /*-------------To calculate Min and Max-------------------*/
+
+    for (p=0;p<setlength-1;p++)
     {
-        stub_Val=i;
-        for (j=i+1;j<setlength;j++)
+        stub_Val=p;
+        for (q=p+1;q<setlength;q++)
         {
-            if (numset[j]<numset[stub_Val])
+            if (numset[q]<numset[stub_Val])
             {
-                stub_Val=j;
+                stub_Val=q;
             }
         }
 
-        swap(&numset[stub_Val], &numset[i]);   
+        swap(&numset[stub_Val], &numset[p]);   // Pass by address.
     }
-    s.average = avg;
-    s.max = numset[setlength-1]; 
-    s.min = numset[0]; 
-return s;
+    s.max = numset[setlength-1];               //TEST_CASE("reports average, minimum and maximum")
+    s.min = numset[0];                         //TEST_CASE("reports average, minimum and maximum")
+
+
+    return s;   // added Missing return Value
 }
 
+
+/* Adding function for Test case : raises alerts when max is greater than threshold */
 int emailAlertCallCount = 0;
 int ledAlertCallCount = 0;
+
 
 void emailAlerter(void)
 {

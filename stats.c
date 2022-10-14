@@ -1,6 +1,5 @@
 #include "stats.h"
 
-/* fucntion to swap the contents of a variable*/
 void swap(float *xp, float *yp)
 {
     float temp = *xp;
@@ -14,51 +13,44 @@ struct Stats compute_statistics(const float* numberset, int setlength) {
     s.min = 0;
     s.max = 0;
 
-    int stub_Val = 0;
-    int p,q,r;
+    int index = 0;
+    int i,j,k;
     int count = 0;
     float add = 0.0;
     float numset[setlength-1];
     
-    /*-------------To calculate Average-------------------*/
     for(count=0; count<setlength;count++)
     {
-		/*Inputs taken from the stats-test.cpp to read the numberset. */
         numset[count] = numberset[count]; 
     }
 
-    for(r=0;r<setlength;r++)
+    for(k=0;k<setlength;k++)
     {
-        add = add + numset[r];
+        add = add + numset[k];
     }
 
-    s.average = (float) add/ setlength;   // For, TEST_CASE("reports average, minimum and maximum")
+    s.average = (float) add/ setlength;   
 
-
-    /*-------------To calculate Min and Max-------------------*/
-
-    for (p=0;p<setlength-1;p++)
+    for (i=0;p<setlength-1;i++)
     {
-        stub_Val=p;
-        for (q=p+1;q<setlength;q++)
+        index=i;
+        for (j=i+1;j<setlength;j++)
         {
-            if (numset[q]<numset[stub_Val])
+            if (numset[j]<numset[index])
             {
-                stub_Val=q;
+                index=j;
             }
         }
 
-        swap(&numset[stub_Val], &numset[p]);   // Pass by address.
+        swap(&numset[index], &numset[p]);  
     }
-    s.max = numset[setlength-1];               //TEST_CASE("reports average, minimum and maximum")
-    s.min = numset[0];                         //TEST_CASE("reports average, minimum and maximum")
+    s.max = numset[setlength-1];           
+    s.min = numset[0];                         
 
 
     return s;   // added Missing return Value
 }
 
-
-/* Adding function for Test case : raises alerts when max is greater than threshold */
 int emailAlertCallCount = 0;
 int ledAlertCallCount = 0;
 

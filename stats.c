@@ -3,17 +3,26 @@
 #include <math.h>
 
 
+void swap(float *xp, float *yp)
+{
+    float temp = *xp;
+    *xp = *yp;
+    *yp = temp;
+}
 
 struct Stats compute_statistics(const float* numberset, int setlength)
  {
     struct Stats s;
-    int i;
+    int i,j,k;
     float sum = 0.0, avg = 0.0;
     float temp=0;
     s.average = 0;
     s.min = 0;
     s.max = 0;
 
+    int  stub_Val = 0;
+   float numset[setlength-1];
+   
     if(setlength == 0)
     {
         //printf("Number set array has zero elements\n");
@@ -31,20 +40,22 @@ struct Stats compute_statistics(const float* numberset, int setlength)
     avg = (sum)/(setlength);
 
 // sorting given array
-    for(i=0; i < setlength; i++)
+   for (i=0;i<setlength-1;i++)
     {
-        if(numberset[i] > numberset[i+1])
+        stub_Val=i;
+        for (j=i+1;j<setlength;j++)
         {
-            temp = numberset[i];
-            numberset[i] = numberset[i+1];
-            numberset[i] = temp;
+            if (numset[j]<numset[stub_Val])
+            {
+                stub_Val=j;
+            }
         }
-        
+
+        swap(&numset[stub_Val], &numset[i]);   
     }
     s.average = avg;
-    s.min = numberset[0];
-    s.max = numberset[setlength-1];
-
+    s.max = numset[setlength-1]; 
+    s.min = numset[0]; 
 return s;
 }
 

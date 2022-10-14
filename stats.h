@@ -14,7 +14,8 @@ void ledAlerter(float maxThreshold, struct Stats *sp);
 void emailAlerter(void);
 void ledAlerter(void)
 
-void (*alerter_funcptr)();
+//void (*alerter_funcptr)();
+typedef void (*alerter_funcptr)();
 void check_and_alert(float maxThreshold, alerter_funcptr alerters[], struct Stats computedStats);
 
 //void (*check_and_alert[])(float maxThreshold, struct Stats *ptr)={emailAlerter, ledAlerter};
